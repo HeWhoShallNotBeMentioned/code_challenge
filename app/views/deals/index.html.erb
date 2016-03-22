@@ -1,0 +1,35 @@
+<h1>Dr. Deal a Days Transactions</h1>
+
+
+<table>
+  <tr>
+    <th>Purchaser</th>
+    <th>Item Description</th>
+    <th>Unit Price</th>
+    <th>Units Purchased</th>
+    <th>Merchant Address</th>
+    <th>Merchant Name</th>
+  </tr>
+  <% @transactions.each do |transaction| %>
+    <tr>
+       <td><%= transaction.purchaser_name %></td>
+       <td><%= transaction.item_description %></td>
+       <td><%= transaction.item_price %></td>
+       <td><%= transaction.purchase_count %></td>
+       <td><%= transaction.merchant_address %></td>
+       <td><%= transaction.merchant_name %></td>
+    </tr>
+    <% @total = @total + (transaction.item_price * transaction.purchase_count) %>
+<% end %>
+  Total Purchased: <%= @total %>
+</table>
+
+<h3>Import Transcations</h3>
+
+<%= form_tag import_deals_path, multipart: true do %>
+  <%= file_field_tag :file %>
+
+  <%= submit_tag "Import" %>
+
+<% end %>
+<td></td><td></td>
